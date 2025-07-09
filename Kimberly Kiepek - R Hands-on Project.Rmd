@@ -1,0 +1,183 @@
+---
+title: "R Hands-on Project"
+author: "Kimberly Kiepek"
+date: "2025-07-08"
+output: html_document
+---
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+```
+
+```{r message=FALSE, warning=FALSE}
+#load in the data set
+library(readr)
+df <- read_csv("Get to know survey 2025.csv")
+glimpse(df)
+```
+
+### 1. Create a new column called Birth_Month which has only the month portion of Birth_Month_Year (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#create a new column called Birth_Month
+df$Birth_Month <- substr(df$Birth_Month_Year, 1, nchar(df$Birth_Month_Year) - 6)
+```
+
+### 2. Create a new column called Birth_Year which has only the year portion of Birth_Month_Year (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#create a new column called Birth_Year
+df$Birth_Year <- substr(df$Birth_Month_Year, nchar(df$Birth_Month_Year) - 3, nchar(df$Birth_Month_Year))
+```
+
+### 3. Since the birth month and birth year were open ended fields, there are many inconsistencies in the data. Standardize the values for Birth_Month and Birth_Year (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#check for unique values in Birth_Month
+unique(df$Birth_Month)
+```
+
+```{r message=FALSE, warning=FALSE}
+#standardize Birth_Month
+df$Birth_Month[df$Birth_Month == "5"] <- "May"
+df$Birth_Month[df$Birth_Month == "october"] <- "October"
+df$Birth_Month[df$Birth_Month == "october, Two Thousand a"] <- "October"
+df$Birth_Month[df$Birth_Month == "4"] <- "April"
+df$Birth_Month[df$Birth_Month == "may"] <- "May"
+df$Birth_Month[df$Birth_Month == "10"] <- "October"
+unique(df$Birth_Month)
+```
+
+```{r message=FALSE, warning=FALSE}
+#check for unique values in Birth_Year
+unique(df$Birth_Year)
+```
+
+```{r message=FALSE, warning=FALSE}
+#standardize Birth_Year
+df$Birth_Year[df$Birth_Year == " two"] <- 2002
+unique(df$Birth_Year)
+```
+
+### 4. Show the five most frequent birth months, and the five least frequent birth months (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#show the five most frequent birth months
+df %>%
+  count(Birth_Month, sort = TRUE) %>%
+  slice(1:6)
+```
+The five most frequent months are: May, June, January, October, and September.
+
+```{r message=FALSE, warning=FALSE}
+#show the five least frequent birth months
+df %>%
+  count(Birth_Month, sort = TRUE) %>%
+  tail(n = 8)
+```
+
+There are seven least frequent months, as three months have the same frequency (tied for the 5th least frequent). The seven least frequent months are: April, February, March, December, August, July, and November. 
+
+### 5. Show the five most frequent birth years, and the five least frequent birth year (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#show the five most frequent birth years
+df %>%
+  count(Birth_Year, sort = TRUE) %>%
+  slice(1:8)
+```
+
+There are seven most frequent years, as four years have the same frequency (tied for the 4th most frequent). The seven most frequent years are: 2003, 2002, 2000, 1992, 1998, 1999, and 2001. 
+
+```{r message=FALSE, warning=FALSE}
+#show the five least frequent birth years
+df %>%
+  count(Birth_Year, sort = TRUE) %>%
+  tail(n = 7)
+```
+
+There are six least frequent years, as 2 years have the same frequency (tied for the 5th least frequent). The six least frequent years are: 1993, 1994, 1995, 1996, 1997, and 2004.
+
+### 6. The State column was also open ended, so there are many inconsistencies. Clean this column to eliminate any non-US state, and to standardize the values for State (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#check for unique values in State
+unique(df$State)
+```
+
+```{r message=FALSE, warning=FALSE}
+#standardize the values for state
+df$State[df$State == "north carolina"] <- "North Carolina"
+df$State[df$State == "NC"] <- "North Carolina"
+df$State[df$State == "GA"] <- "Georgia"
+unique(df$State)
+```
+```{r message=FALSE, warning=FALSE}
+#clean this column to eliminate any non-US state
+#assuming we should drop the columns with non-US states
+filtered_df <- df[df$State!= "N/A", ]
+filtered_df <- filtered_df[filtered_df$State != "", ]
+filtered_df <- filtered_df[filtered_df$State != "Maharashtra", ]
+filtered_df <- filtered_df[filtered_df$State != "Seoul", ]
+filtered_df <- filtered_df[-43,]
+filtered_df <- filtered_df
+unique(filtered_df$State)
+```
+
+### 7. Show the five most frequent states, and the five least frequent state (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#show the five most frequent states
+filtered_df %>%
+  count(State, sort = TRUE) %>%
+  slice(1:7)
+```
+
+There are six most frequent states, as 4 states have the same frequency (tied for the 5th most frequent). The six most frequent states are: North Carolina, New York, Georgia, Minnesota, Pennsylvania, and Texas.
+
+```{r message=FALSE, warning=FALSE}
+#show the five least frequent birth states
+filtered_df %>%
+  count(State, sort = TRUE) %>%
+  tail(n = 6)
+```
+
+There are only four least frequent states, as the rest of the states have more than one observation. The least frequent states are: California, Indiana, Tennessee, and Virginia.
+
+### 8. Similar to State, the column Country needs to be standardized. Once you standardize it, show the five most frequent countries, and the five least frequent countries (10 points).
+
+```{r message=FALSE, warning=FALSE}
+#assuming we use the original df, not the df with non-US states dropped
+#check for unique values in Country
+unique(df$Country)
+```
+
+```{r message=FALSE, warning=FALSE}
+#standardize the values for Country
+df$Country[df$Country == "USA"] <- "United States"
+df$Country[df$Country == "united states"] <- "United States"
+df$Country[df$Country == "US"] <- "United States"
+df$Country[df$Country == "United States of America"] <- "United States"
+unique(df$Country)
+```
+
+```{r message=FALSE, warning=FALSE}
+#show the five most frequent Country
+df %>%
+  count(Country, sort = TRUE) %>%
+  slice(1:7)
+```
+
+The most frequent country is the United States. The rest of the countries, including Germany, Ghana and Malawi, India, Israel, Mexico, and South Korea, only have 1 observation each. 
+
+### 9. We want to clean the How_Hear_About_Program column by eliminating the number and any extra character portion in those responses (so we keep only the text portion). Show the five most frequent responses to this column (10 points).
+
+```{r message=FALSE, warning=FALSE}
+
+```
+
+### 10. We want to transform the data from wide to long on column Languages by duplicating the values of the other columns. You can use the comma as a separator for Languages. Show the five most frequent languages (10 points).
+
+```{r message=FALSE, warning=FALSE}
+
+```

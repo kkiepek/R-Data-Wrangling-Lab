@@ -379,16 +379,7 @@ df$Birth_Year &lt;- substr(df$Birth_Month_Year, nchar(df$Birth_Month_Year) - 3, 
 there are many inconsistencies in the data. Standardize the values for
 Birth_Month and Birth_Year (10 points).</h3>
 <pre class="r"><code>#Check for unique values in Birth_Month
-unique(df$Birth_Month)</code></pre>
-<pre><code>##  [1] &quot;January&quot;                 &quot;May&quot;                    
-##  [3] &quot;December&quot;                &quot;July&quot;                   
-##  [5] &quot;November&quot;                &quot;February&quot;               
-##  [7] &quot;October&quot;                 &quot;June&quot;                   
-##  [9] &quot;April&quot;                   &quot;March&quot;                  
-## [11] &quot;4&quot;                       &quot;may&quot;                    
-## [13] &quot;10&quot;                      &quot;September&quot;              
-## [15] &quot;August&quot;                  &quot;5&quot;                      
-## [17] &quot;october, Two Thousand a&quot;</code></pre>
+#unique(df$Birth_Month)</code></pre>
 <pre class="r"><code>#Standardize Birth_Month
 df$Birth_Month[df$Birth_Month == &quot;5&quot;] &lt;- &quot;May&quot;
 df$Birth_Month[df$Birth_Month == &quot;october&quot;] &lt;- &quot;October&quot;
@@ -396,18 +387,12 @@ df$Birth_Month[df$Birth_Month == &quot;october, Two Thousand a&quot;] &lt;- &quo
 df$Birth_Month[df$Birth_Month == &quot;4&quot;] &lt;- &quot;April&quot;
 df$Birth_Month[df$Birth_Month == &quot;may&quot;] &lt;- &quot;May&quot;
 df$Birth_Month[df$Birth_Month == &quot;10&quot;] &lt;- &quot;October&quot;
-unique(df$Birth_Month)</code></pre>
-<pre><code>##  [1] &quot;January&quot;   &quot;May&quot;       &quot;December&quot;  &quot;July&quot;      &quot;November&quot;  &quot;February&quot; 
-##  [7] &quot;October&quot;   &quot;June&quot;      &quot;April&quot;     &quot;March&quot;     &quot;September&quot; &quot;August&quot;</code></pre>
+#unique(df$Birth_Month)</code></pre>
 <pre class="r"><code>#Check for unique values in Birth_Year
-unique(df$Birth_Year)</code></pre>
-<pre><code>##  [1] &quot;2002&quot; &quot;2003&quot; &quot;1992&quot; &quot;2001&quot; &quot;2000&quot; &quot;1995&quot; &quot;1999&quot; &quot;1998&quot; &quot;2004&quot; &quot;1993&quot;
-## [11] &quot;1994&quot; &quot;1997&quot; &quot; two&quot; &quot;1996&quot;</code></pre>
+#unique(df$Birth_Year)</code></pre>
 <pre class="r"><code>#Standardize Birth_Year
 df$Birth_Year[df$Birth_Year == &quot; two&quot;] &lt;- 2002
-unique(df$Birth_Year)</code></pre>
-<pre><code>##  [1] &quot;2002&quot; &quot;2003&quot; &quot;1992&quot; &quot;2001&quot; &quot;2000&quot; &quot;1995&quot; &quot;1999&quot; &quot;1998&quot; &quot;2004&quot; &quot;1993&quot;
-## [11] &quot;1994&quot; &quot;1997&quot; &quot;1996&quot;</code></pre>
+#unique(df$Birth_Year)</code></pre>
 </div>
 <div id="show-the-five-most-frequent-birth-months-and-the-five-least-frequent-birth-months-10-points." class="section level3">
 <h3>4. Show the five most frequent birth months, and the five least
@@ -491,21 +476,12 @@ years are: 1993, 1994, 1995, 1996, 1997, and 2004.</p>
 inconsistencies. Clean this column to eliminate any non-US state, and to
 standardize the values for State (10 points).</h3>
 <pre class="r"><code>#Check for unique values in State
-unique(df$State)</code></pre>
-<pre><code>##  [1] &quot;North Carolina&quot; &quot;Seoul&quot;          &quot;Tennessee&quot;      &quot;New York&quot;      
-##  [5] &quot;NC&quot;             &quot;California&quot;     &quot;Texas&quot;          &quot;Minnesota&quot;     
-##  [9] &quot;Pennsylvania&quot;   &quot;GA&quot;             &quot;north carolina&quot; NA              
-## [13] &quot;Georgia&quot;        &quot;Indiana&quot;        &quot;N/A&quot;            &quot;Maharashtra&quot;   
-## [17] &quot;Virginia&quot;</code></pre>
+#unique(df$State)</code></pre>
 <pre class="r"><code>#Standardize the values for state
 df$State[df$State == &quot;north carolina&quot;] &lt;- &quot;North Carolina&quot;
 df$State[df$State == &quot;NC&quot;] &lt;- &quot;North Carolina&quot;
 df$State[df$State == &quot;GA&quot;] &lt;- &quot;Georgia&quot;
-unique(df$State)</code></pre>
-<pre><code>##  [1] &quot;North Carolina&quot; &quot;Seoul&quot;          &quot;Tennessee&quot;      &quot;New York&quot;      
-##  [5] &quot;California&quot;     &quot;Texas&quot;          &quot;Minnesota&quot;      &quot;Pennsylvania&quot;  
-##  [9] &quot;Georgia&quot;        NA               &quot;Indiana&quot;        &quot;N/A&quot;           
-## [13] &quot;Maharashtra&quot;    &quot;Virginia&quot;</code></pre>
+#unique(df$State)</code></pre>
 <pre class="r"><code>#Clean this column to eliminate any non-US state
 #Assuming we should drop the columns with non-US states
 filtered_df &lt;- df[df$State!= &quot;N/A&quot;, ]
@@ -514,10 +490,7 @@ filtered_df &lt;- filtered_df[filtered_df$State != &quot;Maharashtra&quot;, ]
 filtered_df &lt;- filtered_df[filtered_df$State != &quot;Seoul&quot;, ]
 filtered_df &lt;- filtered_df[-43,]
 filtered_df &lt;- filtered_df
-unique(filtered_df$State)</code></pre>
-<pre><code>##  [1] &quot;North Carolina&quot; &quot;Tennessee&quot;      &quot;New York&quot;       &quot;California&quot;    
-##  [5] &quot;Texas&quot;          &quot;Minnesota&quot;      &quot;Pennsylvania&quot;   &quot;Georgia&quot;       
-##  [9] &quot;Indiana&quot;        &quot;Virginia&quot;</code></pre>
+#unique(filtered_df$State)</code></pre>
 </div>
 <div id="show-the-five-most-frequent-states-and-the-five-least-frequent-state-10-points." class="section level3">
 <h3>7. Show the five most frequent states, and the five least frequent
@@ -563,21 +536,13 @@ Once you standardize it, show the five most frequent countries, and the
 five least frequent countries (10 points).</h3>
 <pre class="r"><code>#Assuming we use the original df, not the df with non-US states dropped
 #Check for unique values in Country
-unique(df$Country)</code></pre>
-<pre><code>##  [1] &quot;United States&quot;            &quot;South Korea&quot;             
-##  [3] &quot;United States of America&quot; &quot;USA&quot;                     
-##  [5] &quot;Mexico&quot;                   &quot;US&quot;                      
-##  [7] &quot;united states&quot;            &quot;Germany&quot;                 
-##  [9] &quot;Ghana and Malawi&quot;         &quot;Israel&quot;                  
-## [11] &quot;India&quot;</code></pre>
+#unique(df$Country)</code></pre>
 <pre class="r"><code>#Standardize the values for Country
 df$Country[df$Country == &quot;USA&quot;] &lt;- &quot;United States&quot;
 df$Country[df$Country == &quot;united states&quot;] &lt;- &quot;United States&quot;
 df$Country[df$Country == &quot;US&quot;] &lt;- &quot;United States&quot;
 df$Country[df$Country == &quot;United States of America&quot;] &lt;- &quot;United States&quot;
-unique(df$Country)</code></pre>
-<pre><code>## [1] &quot;United States&quot;    &quot;South Korea&quot;      &quot;Mexico&quot;           &quot;Germany&quot;         
-## [5] &quot;Ghana and Malawi&quot; &quot;Israel&quot;           &quot;India&quot;</code></pre>
+#unique(df$Country)</code></pre>
 <pre class="r"><code>#Show the five most frequent Country
 df %&gt;%
   count(Country, sort = TRUE) %&gt;%

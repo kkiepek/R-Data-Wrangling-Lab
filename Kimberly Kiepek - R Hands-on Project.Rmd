@@ -34,7 +34,7 @@ df$Birth_Year <- substr(df$Birth_Month_Year, nchar(df$Birth_Month_Year) - 3, nch
 
 ```{r message=FALSE, warning=FALSE}
 #Check for unique values in Birth_Month
-unique(df$Birth_Month)
+#unique(df$Birth_Month)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -45,18 +45,18 @@ df$Birth_Month[df$Birth_Month == "october, Two Thousand a"] <- "October"
 df$Birth_Month[df$Birth_Month == "4"] <- "April"
 df$Birth_Month[df$Birth_Month == "may"] <- "May"
 df$Birth_Month[df$Birth_Month == "10"] <- "October"
-unique(df$Birth_Month)
+#unique(df$Birth_Month)
 ```
 
 ```{r message=FALSE, warning=FALSE}
 #Check for unique values in Birth_Year
-unique(df$Birth_Year)
+#unique(df$Birth_Year)
 ```
 
 ```{r message=FALSE, warning=FALSE}
 #Standardize Birth_Year
 df$Birth_Year[df$Birth_Year == " two"] <- 2002
-unique(df$Birth_Year)
+#unique(df$Birth_Year)
 ```
 
 ### 4. Show the five most frequent birth months, and the five least frequent birth months (10 points).
@@ -75,7 +75,6 @@ df %>%
   count(Birth_Month, sort = TRUE) %>%
   tail(n = 8)
 ```
-
 There are seven least frequent months, as three months have the same frequency (tied for the 5th least frequent). The seven least frequent months are: April, February, March, December, August, July, and November. 
 
 ### 5. Show the five most frequent birth years, and the five least frequent birth year (10 points).
@@ -86,7 +85,6 @@ df %>%
   count(Birth_Year, sort = TRUE) %>%
   slice(1:8)
 ```
-
 There are seven most frequent years, as four years have the same frequency (tied for the 4th most frequent). The seven most frequent years are: 2003, 2002, 2000, 1992, 1998, 1999, and 2001. 
 
 ```{r message=FALSE, warning=FALSE}
@@ -102,7 +100,7 @@ There are six least frequent years, as two years have the same frequency (tied f
 
 ```{r message=FALSE, warning=FALSE}
 #Check for unique values in State
-unique(df$State)
+#unique(df$State)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -110,8 +108,9 @@ unique(df$State)
 df$State[df$State == "north carolina"] <- "North Carolina"
 df$State[df$State == "NC"] <- "North Carolina"
 df$State[df$State == "GA"] <- "Georgia"
-unique(df$State)
+#unique(df$State)
 ```
+
 ```{r message=FALSE, warning=FALSE}
 #Clean this column to eliminate any non-US state
 #Assuming we should drop the columns with non-US states
@@ -121,7 +120,7 @@ filtered_df <- filtered_df[filtered_df$State != "Maharashtra", ]
 filtered_df <- filtered_df[filtered_df$State != "Seoul", ]
 filtered_df <- filtered_df[-43,]
 filtered_df <- filtered_df
-unique(filtered_df$State)
+#unique(filtered_df$State)
 ```
 
 ### 7. Show the five most frequent states, and the five least frequent state (10 points).
@@ -149,7 +148,7 @@ There are only four least frequent states, as the rest of the states have more t
 ```{r message=FALSE, warning=FALSE}
 #Assuming we use the original df, not the df with non-US states dropped
 #Check for unique values in Country
-unique(df$Country)
+#unique(df$Country)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -158,7 +157,7 @@ df$Country[df$Country == "USA"] <- "United States"
 df$Country[df$Country == "united states"] <- "United States"
 df$Country[df$Country == "US"] <- "United States"
 df$Country[df$Country == "United States of America"] <- "United States"
-unique(df$Country)
+#unique(df$Country)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -167,7 +166,6 @@ df %>%
   count(Country, sort = TRUE) %>%
   slice(1:7)
 ```
-
 The most frequent country is the United States. The rest of the countries, including Germany, Ghana and Malawi, India, Israel, Mexico, and South Korea, only have one observation each. 
 
 ### 9. We want to clean the How_Hear_About_Program column by eliminating the number and any extra character portion in those responses (so we keep only the text portion). Show the five most frequent responses to this column (10 points).

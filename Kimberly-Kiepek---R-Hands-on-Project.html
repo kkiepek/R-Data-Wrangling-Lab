@@ -567,7 +567,24 @@ the number and any extra character portion in those responses (so we
 keep only the text portion). Show the five most frequent responses to
 this column (10 points).</h3>
 <pre class="r"><code>#Eliminate the extra character portion in responses for How_Hear_About_Program
-df$How_Hear_About_Program &lt;- substring(df$How_Hear_About_Program, 3)</code></pre>
+df$How_Hear_About_Program &lt;- gsub(&quot;^\\d+\\.&quot;, &quot;&quot;, df$How_Hear_About_Program)</code></pre>
+<pre class="r"><code>df %&gt;%
+  count(How_Hear_About_Program, sort = TRUE) %&gt;%
+  slice(1:7)</code></pre>
+<pre><code>## # A tibble: 7 × 2
+##   How_Hear_About_Program                          n
+##   &lt;chr&gt;                                       &lt;int&gt;
+## 1 &quot; Recommended by family/friends&quot;               32
+## 2 &quot; Recommended by professors&quot;                   14
+## 3 &quot; Search engine&quot;                               11
+## 4 &quot; On social media (Twitter, Instagram, FB)&quot;     2
+## 5 &quot;Campus event&quot;                                  1
+## 6 &quot;Data Analytics Club&quot;                           1
+## 7  &lt;NA&gt;                                           1</code></pre>
+<p>There are six most frequent responses, as two have the same frequency
+(tied for the 5th most frequent). The six most frequent responses are:
+Recommended by family/friends, Recommended by professors, Search engine,
+On social media, Campus event, and Data Analytics Club.</p>
 </div>
 <div id="we-want-to-transform-the-data-from-wide-to-long-on-column-languages-by-duplicating-the-values-of-the-other-columns.-you-can-use-the-comma-as-a-separator-for-languages.-show-the-five-most-frequent-languages-10-points." class="section level3">
 <h3>10. We want to transform the data from wide to long on column

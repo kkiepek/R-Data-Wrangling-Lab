@@ -172,8 +172,15 @@ The most frequent country is the United States. The rest of the countries, inclu
 
 ```{r message=FALSE, warning=FALSE}
 #Eliminate the extra character portion in responses for How_Hear_About_Program
-df$How_Hear_About_Program <- substring(df$How_Hear_About_Program, 3)
+df$How_Hear_About_Program <- gsub("^\\d+\\.", "", df$How_Hear_About_Program)
 ```
+
+```{r message=FALSE, warning=FALSE}
+df %>%
+  count(How_Hear_About_Program, sort = TRUE) %>%
+  slice(1:7)
+```
+There are six most frequent responses, as two have the same frequency (tied for the 5th most frequent). The six most frequent responses are: Recommended by family/friends, Recommended by professors, Search engine, On social media, Campus event, and Data Analytics Club. 
 
 ### 10. We want to transform the data from wide to long on column Languages by duplicating the values of the other columns. You can use the comma as a separator for Languages. Show the five most frequent languages (10 points).
 
